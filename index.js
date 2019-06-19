@@ -3,7 +3,6 @@ var exec = require('child_process').exec
   , execSync = require('child_process').execSync
   , existsSync = require('fs').existsSync
   , debug = require('debug')('gitlog')
-  , extend = require('lodash.assign')
   , delimiter = '\t'
   , fields =
     { hash: '%H'
@@ -53,8 +52,8 @@ function gitlog(options, cb) {
     }
 
   // Set defaults
-  options = extend({}, defaultOptions, options)
-  extend(options.execOptions, defaultOptions.execOptions)
+  options = Object.assign({}, defaultOptions, options)
+  Object.assign(options.execOptions, defaultOptions.execOptions)
 
   // Start constructing command
   var command = 'git log '
